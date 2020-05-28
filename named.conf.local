@@ -1,0 +1,23 @@
+zone "x.x.x.x.x.x.x.x.ip6.arpa" {
+        type master;
+        file "/var/cache/bind/master-rev/2804.ff4.rev";
+        masters { xxxx:xxxx:x:x::x; };
+        allow-notify { xxxx:xxxx:x:x::x; };
+        zone-statistics yes;
+};
+
+zone "x.x.x.in-addr.arpa" {
+        type master;
+        file "/var/cache/bind/master-rev/x.x.x.rev";
+        masters { x.x.x.x; };
+        allow-notify { x.x.x.x; };
+        zone-statistics yes;
+};
+
+zone "remontti.com.br" {
+        type master;
+        file "/var/cache/bind/master-aut/remontti.com.hosts";
+        masters { x.x.x.x; };
+        allow-notify { x.x.x.x; };
+        zone-statistics yes;
+};
