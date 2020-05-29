@@ -17,7 +17,7 @@ Most statistics available are collected, several aggregate graphs are defined.
 * Configure Bind to export statistics via HTTP by adding the following to your bind.conf and restarting bind:
 ```
 statistics-channels {
- 	inet 127.0.0.1 port 8653 allow { 127.0.0.1; };
+ 	inet 127.0.0.1 port 58053 allow { 127.0.0.1; };
 };
 ```
 * Copy the userparameter_bind.conf into your zabbix agents include directory (/etc/zabbix/zabbix_agentd.d/ on
