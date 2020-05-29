@@ -11,15 +11,14 @@ Most statistics available are collected, several aggregate graphs are defined.
 * Python 3
 
 ## To install:
-* Configure Bind to export statistics via HTTP by adding the following to your named.conf and restarting bind:
+* Configure Bind to export statistics via HTTP by adding the following to your <b>named.conf</b> and restarting bind:
 ```
 statistics-channels {
  	inet 127.0.0.1 port 58053 allow { 127.0.0.1; };
 };
 ```
-* Copy the userparameter_rr_bind.conf into your zabbix agents include directory (/etc/zabbix/zabbix_agentd.d/ on
-Debian 10)
-* Copy the script bind-stats-rr.py to /etc/zabbix/script/
+* Copy the <b>userparameter_rr_bind.conf</b> into your zabbix agents include directory (<b>/etc/zabbix/zabbix_agentd.d/</b> on Debian 10)
+* Copy the script <b>bind-stats-rr.py</b> to <b>/etc/zabbix/script/</b>
 userparameter_bind.conf)
 * Import the xml template into Zabbix
 ```
@@ -29,5 +28,5 @@ chown zabbix. /etc/zabbix/script
 ```
 ## Note:
 
-You can enable per-zone statistics (which will be automatically discovered) by adding the following clause to each zone definition in your named.conf.local:
+You can enable per-zone statistics (which will be automatically discovered) by adding the following clause to each zone definition in your <b>named.conf.local</b>:
 `zone-statistics yes;`
