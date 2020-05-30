@@ -24,7 +24,9 @@ userparameter_bind.conf)
 ```
 mkdir /etc/zabbix/script
 mv /***/bind-stats-rr.py /etc/zabbix/script
-chown zabbix. /etc/zabbix/script
+chmod a+x /etc/zabbix/script/bind-stats-rr.py
+chown zabbix. /etc/zabbix/script/ -R
+
 ```
 ## Note:
 
