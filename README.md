@@ -22,6 +22,8 @@ statistics-channels {
 userparameter_bind.conf)
 * Import the xml template into Zabbix
 ```
+/etc/zabbix/zabbix_agentd.conf.d
+wget https://raw.githubusercontent.com/remontti/Zabbix-Bind9-Statistics-Collection/master/userparameter_rr_bind.conf
 mkdir /etc/zabbix/script
 cd /etc/zabbix/script
 wget https://raw.githubusercontent.com/remontti/Zabbix-Bind9-Statistics-Collection/master/bind-stats-rr.py
