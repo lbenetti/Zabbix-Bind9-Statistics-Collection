@@ -23,7 +23,8 @@ userparameter_bind.conf)
 * Import the xml template into Zabbix
 ```
 mkdir /etc/zabbix/script
-mv /***/bind-stats-rr.py /etc/zabbix/script
+cd /etc/zabbix/script
+wget https://raw.githubusercontent.com/remontti/Zabbix-Bind9-Statistics-Collection/master/bind-stats-rr.py
 chmod a+x /etc/zabbix/script/bind-stats-rr.py
 chown zabbix. /etc/zabbix/script/ -R
 
