@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2020-05-29T18:02:02Z</date>
+    <date>2022-11-25T16:20:52Z</date>
     <groups>
         <group>
             <name>Templates RR</name>
@@ -9,8 +9,46 @@
     </groups>
     <templates>
         <template>
-            <template>RR Bind9 - Estatisticas</template>
-            <name>RR Bind9 - Estatisticas</name>
+            <template>RR Servico Bind9</template>
+            <name>RR Servico Bind9</name>
+            <groups>
+                <group>
+                    <name>Templates RR</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Serviço de DNS</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Status</name>
+                    <key>net.udp.listen[53]</key>
+                    <history>2d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Serviço de DNS</name>
+                        </application>
+                    </applications>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{sum(60)}=0</expression>
+                            <name>Serviço DNS está parado em  {HOST.NAME}</name>
+                            <priority>DISASTER</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+        <template>
+            <template>RR Servico Bind9 - Estatisticas</template>
+            <name>RR Servico Bind9 - Estatisticas</name>
             <groups>
                 <group>
                     <name>Templates RR</name>
@@ -2792,7 +2830,7 @@
                     </master_item>
                 </item>
                 <item>
-                    <name>Resolvedor - Delegações autoritativas inválidas recebidas</name>
+                    <name>Resolvedor -  Resoluções inválidas recebidas</name>
                     <type>DEPENDENT</type>
                     <key>bind.resolvercounter[Lame]</key>
                     <delay>0</delay>
@@ -2816,8 +2854,8 @@
                     </master_item>
                     <triggers>
                         <trigger>
-                            <expression>{change(0)}&gt;20</expression>
-                            <name>Muitas Delegações autoritativas  inválidas recebidas</name>
+                            <expression>{change(0)}&gt;80</expression>
+                            <name>Muitas resoluções inválidas</name>
                             <priority>WARNING</priority>
                         </trigger>
                     </triggers>
@@ -5852,7 +5890,7 @@
                                 <graph_item>
                                     <color>00C800</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryFailure]</key>
                                     </item>
                                 </graph_item>
@@ -5860,7 +5898,7 @@
                                     <sortorder>1</sortorder>
                                     <color>0000C8</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QrySuccess]</key>
                                     </item>
                                 </graph_item>
@@ -5868,7 +5906,7 @@
                                     <sortorder>2</sortorder>
                                     <color>C800C8</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryAuthAns]</key>
                                     </item>
                                 </graph_item>
@@ -5876,7 +5914,7 @@
                                     <sortorder>3</sortorder>
                                     <color>00C8C8</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryFORMERR]</key>
                                     </item>
                                 </graph_item>
@@ -5884,7 +5922,7 @@
                                     <sortorder>4</sortorder>
                                     <color>C8C800</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryNxrrset]</key>
                                     </item>
                                 </graph_item>
@@ -5892,7 +5930,7 @@
                                     <sortorder>5</sortorder>
                                     <color>C8C8C8</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryNoauthAns]</key>
                                     </item>
                                 </graph_item>
@@ -5900,14 +5938,14 @@
                                     <sortorder>6</sortorder>
                                     <color>960000</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryNXDOMAIN]</key>
                                     </item>
                                 </graph_item>
                                 <graph_item>
                                     <sortorder>7</sortorder>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryReferral]</key>
                                     </item>
                                 </graph_item>
@@ -5915,7 +5953,7 @@
                                     <sortorder>8</sortorder>
                                     <color>000096</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QrySERVFAIL]</key>
                                     </item>
                                 </graph_item>
@@ -5923,7 +5961,7 @@
                                     <sortorder>9</sortorder>
                                     <color>960096</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryRecursion]</key>
                                     </item>
                                 </graph_item>
@@ -5931,7 +5969,7 @@
                                     <sortorder>10</sortorder>
                                     <color>009696</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryDropped]</key>
                                     </item>
                                 </graph_item>
@@ -5939,7 +5977,7 @@
                                     <sortorder>11</sortorder>
                                     <color>969600</color>
                                     <item>
-                                        <host>RR Bind9 - Estatisticas</host>
+                                        <host>RR Servico Bind9 - Estatisticas</host>
                                         <key>bind.zonecounter[{#ZONE},QryDuplicate]</key>
                                     </item>
                                 </graph_item>
@@ -5959,7 +5997,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Consultas de saída</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -5981,7 +6019,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Consultas recebidas</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -6003,7 +6041,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Estatísticas de consultas</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -6025,7 +6063,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Latência das resoluções de nomes</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -6047,7 +6085,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Estatísticas de conexões UDP IPv4</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -6069,7 +6107,7 @@
                             <style>0</style>
                             <resource>
                                 <name>Bind Estatísticas de conexões UDP IPv6</name>
-                                <host>RR Bind9 - Estatisticas</host>
+                                <host>RR Servico Bind9 - Estatisticas</host>
                             </resource>
                             <width>500</width>
                             <height>100</height>
@@ -6090,6 +6128,229 @@
                 </screen>
             </screens>
         </template>
+        <template>
+            <template>RR Servico Bind9 - Valida arquivos - Deb9</template>
+            <name>RR Servico Bind9 - Valida arquivos - Deb9</name>
+            <description>Debian 7,8,9</description>
+            <groups>
+                <group>
+                    <name>Templates RR</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Segurança</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>db.root  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/db.root]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>db.root foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>named.conf.local  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf.local]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf.local foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>named.conf.options  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf.options]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf.options foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>named.conf  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+        <template>
+            <template>RR Servico Bind9 - Valida arquivos - Deb10</template>
+            <name>RR Servico Bind9 - Valida arquivos - Deb10</name>
+            <description>Debian 10</description>
+            <groups>
+                <group>
+                    <name>Templates RR</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>Segurança</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>named.conf.local  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf.local]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf.local foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>named.conf.options  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf.options]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf.options foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>named.conf  $1</name>
+                    <key>vfs.file.cksum[/etc/bind/named.conf]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>named.conf foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>db.root  $1</name>
+                    <key>vfs.file.cksum[/usr/share/dns/root.hints]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <request_method>POST</request_method>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>db.root foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>root.key  $1</name>
+                    <key>vfs.file.cksum[/usr/share/dns/root.key]</key>
+                    <delay>60s</delay>
+                    <history>1d</history>
+                    <trends>7d</trends>
+                    <applications>
+                        <application>
+                            <name>Segurança</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{diff(0)}&gt;0</expression>
+                            <name>root.key foi alterado  em {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+        </template>
+        <template>
+            <template>RR Servico Bind9 - Valida arquivos - Deb11</template>
+            <name>RR Servico Bind9 - Valida arquivos - Deb11</name>
+            <description>Debian 10</description>
+            <groups>
+                <group>
+                    <name>Templates RR</name>
+                </group>
+            </groups>
+        </template>
     </templates>
     <graphs>
         <graph>
@@ -6099,7 +6360,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[A]</key>
                     </item>
                 </graph_item>
@@ -6107,7 +6368,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[AAAA]</key>
                     </item>
                 </graph_item>
@@ -6115,7 +6376,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[ANY]</key>
                     </item>
                 </graph_item>
@@ -6123,7 +6384,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[CNAME]</key>
                     </item>
                 </graph_item>
@@ -6131,7 +6392,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[MX]</key>
                     </item>
                 </graph_item>
@@ -6139,7 +6400,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[NAPTR]</key>
                     </item>
                 </graph_item>
@@ -6147,7 +6408,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[NS]</key>
                     </item>
                 </graph_item>
@@ -6155,7 +6416,7 @@
                     <sortorder>7</sortorder>
                     <color>89ABF8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[NXDOMAIN]</key>
                     </item>
                 </graph_item>
@@ -6163,14 +6424,14 @@
                     <sortorder>8</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[PTR]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>9</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[SOA]</key>
                     </item>
                 </graph_item>
@@ -6178,7 +6439,7 @@
                     <sortorder>10</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[SPF]</key>
                     </item>
                 </graph_item>
@@ -6186,7 +6447,7 @@
                     <sortorder>11</sortorder>
                     <color>960096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[SRV]</key>
                     </item>
                 </graph_item>
@@ -6194,7 +6455,7 @@
                     <sortorder>12</sortorder>
                     <color>009696</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[TXT]</key>
                     </item>
                 </graph_item>
@@ -6207,7 +6468,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_A]</key>
                     </item>
                 </graph_item>
@@ -6215,7 +6476,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_AAAA]</key>
                     </item>
                 </graph_item>
@@ -6223,7 +6484,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_ANY]</key>
                     </item>
                 </graph_item>
@@ -6231,7 +6492,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_CNAME]</key>
                     </item>
                 </graph_item>
@@ -6239,7 +6500,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_MX]</key>
                     </item>
                 </graph_item>
@@ -6247,7 +6508,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_NAPTR]</key>
                     </item>
                 </graph_item>
@@ -6255,7 +6516,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_NS]</key>
                     </item>
                 </graph_item>
@@ -6263,7 +6524,7 @@
                     <sortorder>7</sortorder>
                     <color>89ABF8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_NXDOMAIN]</key>
                     </item>
                 </graph_item>
@@ -6271,14 +6532,14 @@
                     <sortorder>8</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_PTR]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>9</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_SOA]</key>
                     </item>
                 </graph_item>
@@ -6286,7 +6547,7 @@
                     <sortorder>10</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_SPF]</key>
                     </item>
                 </graph_item>
@@ -6294,7 +6555,7 @@
                     <sortorder>11</sortorder>
                     <color>960096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_SRV]</key>
                     </item>
                 </graph_item>
@@ -6302,7 +6563,7 @@
                     <sortorder>12</sortorder>
                     <color>009696</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[_TXT]</key>
                     </item>
                 </graph_item>
@@ -6315,7 +6576,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[A]</key>
                     </item>
                 </graph_item>
@@ -6323,7 +6584,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[AAAA]</key>
                     </item>
                 </graph_item>
@@ -6331,7 +6592,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[ANY]</key>
                     </item>
                 </graph_item>
@@ -6339,7 +6600,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[CNAME]</key>
                     </item>
                 </graph_item>
@@ -6347,7 +6608,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[MX]</key>
                     </item>
                 </graph_item>
@@ -6355,7 +6616,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[NAPTR]</key>
                     </item>
                 </graph_item>
@@ -6363,7 +6624,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[NS]</key>
                     </item>
                 </graph_item>
@@ -6371,14 +6632,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[PTR]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[SOA]</key>
                     </item>
                 </graph_item>
@@ -6386,7 +6647,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[SPF]</key>
                     </item>
                 </graph_item>
@@ -6394,7 +6655,7 @@
                     <sortorder>10</sortorder>
                     <color>960096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[SRV]</key>
                     </item>
                 </graph_item>
@@ -6402,7 +6663,7 @@
                     <sortorder>11</sortorder>
                     <color>009696</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[TXT]</key>
                     </item>
                 </graph_item>
@@ -6415,7 +6676,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[A]</key>
                     </item>
                 </graph_item>
@@ -6423,7 +6684,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[AAAA]</key>
                     </item>
                 </graph_item>
@@ -6431,7 +6692,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[ANY]</key>
                     </item>
                 </graph_item>
@@ -6439,7 +6700,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[CNAME]</key>
                     </item>
                 </graph_item>
@@ -6447,7 +6708,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[MX]</key>
                     </item>
                 </graph_item>
@@ -6455,7 +6716,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[NAPTR]</key>
                     </item>
                 </graph_item>
@@ -6463,7 +6724,7 @@
                     <sortorder>6</sortorder>
                     <color>37474F</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[NS]</key>
                     </item>
                 </graph_item>
@@ -6471,14 +6732,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[PTR]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[SOA]</key>
                     </item>
                 </graph_item>
@@ -6486,7 +6747,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[SPF]</key>
                     </item>
                 </graph_item>
@@ -6494,7 +6755,7 @@
                     <sortorder>10</sortorder>
                     <color>960096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[SRV]</key>
                     </item>
                 </graph_item>
@@ -6502,7 +6763,7 @@
                     <sortorder>11</sortorder>
                     <color>009696</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[TXT]</key>
                     </item>
                 </graph_item>
@@ -6515,7 +6776,7 @@
                     <drawtype>BOLD_LINE</drawtype>
                     <color>00FF00</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.incounter[Total]</key>
                     </item>
                 </graph_item>
@@ -6524,7 +6785,7 @@
                     <drawtype>BOLD_LINE</drawtype>
                     <color>0080FF</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.outcounter[Total]</key>
                     </item>
                 </graph_item>
@@ -6537,7 +6798,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4Conn]</key>
                     </item>
                 </graph_item>
@@ -6545,7 +6806,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4RecvErr]</key>
                     </item>
                 </graph_item>
@@ -6553,7 +6814,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4SendErr]</key>
                     </item>
                 </graph_item>
@@ -6561,7 +6822,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4AcceptFail]</key>
                     </item>
                 </graph_item>
@@ -6569,7 +6830,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4BindFail]</key>
                     </item>
                 </graph_item>
@@ -6577,7 +6838,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4ConnFail]</key>
                     </item>
                 </graph_item>
@@ -6585,7 +6846,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4OpenFail]</key>
                     </item>
                 </graph_item>
@@ -6593,14 +6854,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4Accept]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4Close]</key>
                     </item>
                 </graph_item>
@@ -6608,7 +6869,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP4Open]</key>
                     </item>
                 </graph_item>
@@ -6621,7 +6882,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6Conn]</key>
                     </item>
                 </graph_item>
@@ -6629,7 +6890,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6RecvErr]</key>
                     </item>
                 </graph_item>
@@ -6637,7 +6898,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6SendErr]</key>
                     </item>
                 </graph_item>
@@ -6645,7 +6906,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6AcceptFail]</key>
                     </item>
                 </graph_item>
@@ -6653,7 +6914,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6BindFail]</key>
                     </item>
                 </graph_item>
@@ -6661,7 +6922,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6ConnFail]</key>
                     </item>
                 </graph_item>
@@ -6669,7 +6930,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6OpenFail]</key>
                     </item>
                 </graph_item>
@@ -6677,14 +6938,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6Accept]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6Close]</key>
                     </item>
                 </graph_item>
@@ -6692,7 +6953,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[TCP6Open]</key>
                     </item>
                 </graph_item>
@@ -6705,7 +6966,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4Conn]</key>
                     </item>
                 </graph_item>
@@ -6713,7 +6974,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4RecvErr]</key>
                     </item>
                 </graph_item>
@@ -6721,7 +6982,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4SendErr]</key>
                     </item>
                 </graph_item>
@@ -6729,7 +6990,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4BindFail]</key>
                     </item>
                 </graph_item>
@@ -6737,7 +6998,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4ConnFail]</key>
                     </item>
                 </graph_item>
@@ -6745,7 +7006,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4OpenFail]</key>
                     </item>
                 </graph_item>
@@ -6753,7 +7014,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4Close]</key>
                     </item>
                 </graph_item>
@@ -6761,7 +7022,7 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP4Open]</key>
                     </item>
                 </graph_item>
@@ -6774,7 +7035,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6Conn]</key>
                     </item>
                 </graph_item>
@@ -6782,7 +7043,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6RecvErr]</key>
                     </item>
                 </graph_item>
@@ -6790,7 +7051,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6SendErr]</key>
                     </item>
                 </graph_item>
@@ -6798,7 +7059,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6BindFail]</key>
                     </item>
                 </graph_item>
@@ -6806,7 +7067,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6ConnFail]</key>
                     </item>
                 </graph_item>
@@ -6814,7 +7075,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6OpenFail]</key>
                     </item>
                 </graph_item>
@@ -6822,7 +7083,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6Close]</key>
                     </item>
                 </graph_item>
@@ -6830,7 +7091,7 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UDP6Open]</key>
                     </item>
                 </graph_item>
@@ -6843,7 +7104,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixConn]</key>
                     </item>
                 </graph_item>
@@ -6851,7 +7112,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixRecvErr]</key>
                     </item>
                 </graph_item>
@@ -6859,7 +7120,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixSendErr]</key>
                     </item>
                 </graph_item>
@@ -6867,7 +7128,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixAcceptFail]</key>
                     </item>
                 </graph_item>
@@ -6875,7 +7136,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixBindFail]</key>
                     </item>
                 </graph_item>
@@ -6883,7 +7144,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixConnFail]</key>
                     </item>
                 </graph_item>
@@ -6891,7 +7152,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixOpenFail]</key>
                     </item>
                 </graph_item>
@@ -6899,14 +7160,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixAccept]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixClose]</key>
                     </item>
                 </graph_item>
@@ -6914,7 +7175,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.socketcounter[UnixOpen]</key>
                     </item>
                 </graph_item>
@@ -6927,7 +7188,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[AuthQryRej]</key>
                     </item>
                 </graph_item>
@@ -6935,7 +7196,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryFailure]</key>
                     </item>
                 </graph_item>
@@ -6943,7 +7204,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QrySuccess]</key>
                     </item>
                 </graph_item>
@@ -6951,7 +7212,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryAuthAns]</key>
                     </item>
                 </graph_item>
@@ -6959,7 +7220,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryFORMERR]</key>
                     </item>
                 </graph_item>
@@ -6967,7 +7228,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryNxrrset]</key>
                     </item>
                 </graph_item>
@@ -6975,7 +7236,7 @@
                     <sortorder>6</sortorder>
                     <color>C8C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryNoauthAns]</key>
                     </item>
                 </graph_item>
@@ -6983,14 +7244,14 @@
                     <sortorder>7</sortorder>
                     <color>960000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryNXDOMAIN]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>8</sortorder>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryReferral]</key>
                     </item>
                 </graph_item>
@@ -6998,7 +7259,7 @@
                     <sortorder>9</sortorder>
                     <color>000096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QrySERVFAIL]</key>
                     </item>
                 </graph_item>
@@ -7006,7 +7267,7 @@
                     <sortorder>10</sortorder>
                     <color>960096</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryRecursion]</key>
                     </item>
                 </graph_item>
@@ -7014,7 +7275,7 @@
                     <sortorder>11</sortorder>
                     <color>009696</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryDropped]</key>
                     </item>
                 </graph_item>
@@ -7022,7 +7283,7 @@
                     <sortorder>12</sortorder>
                     <color>969600</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.counter[QryDuplicate]</key>
                     </item>
                 </graph_item>
@@ -7035,7 +7296,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[ValAttempt]</key>
                     </item>
                 </graph_item>
@@ -7043,7 +7304,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[ValFail]</key>
                     </item>
                 </graph_item>
@@ -7051,7 +7312,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[ValNegOk]</key>
                     </item>
                 </graph_item>
@@ -7059,7 +7320,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[ValOk]</key>
                     </item>
                 </graph_item>
@@ -7073,7 +7334,7 @@
                     <color>00FF00</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT10]</key>
                     </item>
                 </graph_item>
@@ -7083,7 +7344,7 @@
                     <color>80FF00</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT100]</key>
                     </item>
                 </graph_item>
@@ -7093,7 +7354,7 @@
                     <color>FFEE58</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT500]</key>
                     </item>
                 </graph_item>
@@ -7103,7 +7364,7 @@
                     <color>FFFF00</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT800]</key>
                     </item>
                 </graph_item>
@@ -7113,7 +7374,7 @@
                     <color>FF6F00</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT1600]</key>
                     </item>
                 </graph_item>
@@ -7123,7 +7384,7 @@
                     <color>D32F2F</color>
                     <yaxisside>RIGHT</yaxisside>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.resolvercounter[QryRTT1600PLUS]</key>
                     </item>
                 </graph_item>
@@ -7136,7 +7397,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.memory[TotalUse]</key>
                     </item>
                 </graph_item>
@@ -7144,7 +7405,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.memory[InUse]</key>
                     </item>
                 </graph_item>
@@ -7152,7 +7413,7 @@
                     <sortorder>2</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.memory[BlockSize]</key>
                     </item>
                 </graph_item>
@@ -7160,7 +7421,7 @@
                     <sortorder>3</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.memory[ContextSize]</key>
                     </item>
                 </graph_item>
@@ -7168,7 +7429,7 @@
                     <sortorder>4</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.memory[Lost]</key>
                     </item>
                 </graph_item>
@@ -7181,7 +7442,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[TreeMemTotal]</key>
                     </item>
                 </graph_item>
@@ -7189,7 +7450,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[TreeMemMax]</key>
                     </item>
                 </graph_item>
@@ -7197,7 +7458,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[TreeMemInUse]</key>
                     </item>
                 </graph_item>
@@ -7205,7 +7466,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[HeapMemTotal]</key>
                     </item>
                 </graph_item>
@@ -7213,7 +7474,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[HeapMemMax]</key>
                     </item>
                 </graph_item>
@@ -7221,7 +7482,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[HeapMemInUse]</key>
                     </item>
                 </graph_item>
@@ -7234,7 +7495,7 @@
                 <graph_item>
                     <color>C80000</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[QueryHits]</key>
                     </item>
                 </graph_item>
@@ -7242,7 +7503,7 @@
                     <sortorder>1</sortorder>
                     <color>00C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[QueryMisses]</key>
                     </item>
                 </graph_item>
@@ -7250,7 +7511,7 @@
                     <sortorder>2</sortorder>
                     <color>0000C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[CacheHits]</key>
                     </item>
                 </graph_item>
@@ -7258,7 +7519,7 @@
                     <sortorder>3</sortorder>
                     <color>C800C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[CacheMisses]</key>
                     </item>
                 </graph_item>
@@ -7266,7 +7527,7 @@
                     <sortorder>4</sortorder>
                     <color>00C8C8</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[DeleteTTL]</key>
                     </item>
                 </graph_item>
@@ -7274,7 +7535,7 @@
                     <sortorder>5</sortorder>
                     <color>C8C800</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[DeleteLRU]</key>
                     </item>
                 </graph_item>
@@ -7282,7 +7543,7 @@
                     <sortorder>6</sortorder>
                     <color>7EC25C</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[CacheNodes]</key>
                     </item>
                 </graph_item>
@@ -7290,11 +7551,26 @@
                     <sortorder>7</sortorder>
                     <color>274482</color>
                     <item>
-                        <host>RR Bind9 - Estatisticas</host>
+                        <host>RR Servico Bind9 - Estatisticas</host>
                         <key>bind.cache[CacheBuckets]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
     </graphs>
+    <value_maps>
+        <value_map>
+            <name>Service state</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Down</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Up</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
 </zabbix_export>
